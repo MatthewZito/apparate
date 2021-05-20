@@ -63,7 +63,6 @@ func RemoveWarpPoint(c *Command) {
 func GotoWarpPoint(c *Command) {
 	p := Portal{
 		Alias: c.Trim(), // TODO check for empty
-		Path:  "",
 	}
 
 	// init db conn
@@ -82,14 +81,14 @@ func GotoWarpPoint(c *Command) {
 		ErrExit(err.Error()) // TODO check for del error and not just the one we manually set
 	}
 
-	// does the Path we retrieved even exist?
+	// does the Path we retrieved still exist?
 	if !Exists(p.Path) {
 		// if we were able to `Get` the key, we can presumably `Delete` it without too much concern
 		db.Delete(&p) // TODO prompt user
 		ErrExit(fmt.Sprintf("Warp-point %s for %s points to an invalid Path. Removed from storage", p.Alias, p.Path))
 	}
 
-	if err = os.Chdir(p.Path); err != nil {
-		ErrExit(fmt.Sprintf("Failed to warp to %s", p.Path))
-	}
+	// print path to stdout, return code 3 to indicate to wrapper which dir to cd into
+	fmt.Print(p.Path) // TODO hide output
+	os.Exit(3)
 }

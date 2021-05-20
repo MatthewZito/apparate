@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/MatthewZito/teleport/internal"
+	"github.com/MatthewZito/apparate/internal"
 )
 
 /* Constants */
@@ -13,7 +13,7 @@ const (
 	REMOVE      = "remove"
 	ADD         = "add"
 	HELP        = "help"
-	CONFIG_PATH = "teleport.conf.json"
+	CONFIG_PATH = "apparate.conf.json"
 )
 
 /* MAIN */

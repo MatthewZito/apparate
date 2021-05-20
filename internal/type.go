@@ -25,7 +25,7 @@ func (c *Command) Trim() string {
 }
 
 func Conn() (*Database, error) {
-	// f := os.Getenv("TELEPORT_CONF")
+	// f := os.Getenv("APPARATE_CONF")
 
 	// if f == "" {
 	// 	return nil, ErrNoConfigVar

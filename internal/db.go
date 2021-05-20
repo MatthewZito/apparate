@@ -19,10 +19,10 @@ var (
 	// is not extant in the db
 	ErrNotFound = errors.New("warp-point does not exist") // TODO add alias
 
-	// ENoConfigVar indicates the environment variable for the teleport config file was not found
-	ErrNoConfigVar = errors.New("configuration file not found; did you set TELEPORT_CONF to the desired Path?")
+	// ENoConfigVar indicates the environment variable for the apparate config file was not found
+	ErrNoConfigVar = errors.New("configuration file not found; did you set APPARATE_CONF to the desired Path?")
 
-	bucketName = []byte("teleport")
+	bucketName = []byte("apparate")
 )
 
 func ErrFileNotFound(name string) error {

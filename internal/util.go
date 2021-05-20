@@ -32,6 +32,6 @@ func ErrExit(m string) {
 
 // OkExit prints a notify message to stdout and exits with a 0 return code
 func OkExit(m string) {
-	fmt.Println("Teleport: " + m)
+	fmt.Println("Apparate: " + m)
 	os.Exit(0)
 }

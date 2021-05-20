@@ -1,4 +1,4 @@
-module github.com/MatthewZito/teleport
+module github.com/MatthewZito/apparate
 
 go 1.16
 
