@@ -10,8 +10,8 @@ WRAPPER=apparate.bash
 
 all: clean test build
 
-build: 
-	$(GOBUILD) -o $(BIN_NAME) -v && chmod u+x $(WRAPPER)
+build: shell
+	$(GOBUILD) -o $(BIN_NAME) -v
 
 .PHONY: test
 test: 
@@ -21,3 +21,6 @@ clean:
 	$(GOCLEAN)
 	rm -f $(BIN_NAME)
 	rm -f $(BIN_UNIX)
+
+shell:
+	chmod u+x $(WRAPPER)
