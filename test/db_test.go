@@ -13,10 +13,12 @@ const (
 	TEST_DB_PATH = "test_db"
 )
 
-var RunTest = CreateForEach(setUp, tearDown)
+var RunTest = RunForEach(setUp, tearDown)
 
 func setUp() {
-	os.Remove(TEST_DB_PATH)
+	if _, err := os.Stat(TEST_DB_PATH); err == nil {
+		os.Remove(TEST_DB_PATH)
+	}
 }
 
 func tearDown() {
@@ -45,7 +47,7 @@ func TestMain(t *testing.T) {
 
 		/* GET */
 		p2 := internal.Portal{
-			Alias: "key1",
+			Alias: KEY,
 		}
 
 		if err := db.Get(&p2); err != nil {
@@ -74,7 +76,7 @@ func TestMain(t *testing.T) {
 	})
 }
 
-func CreateForEach(setUp func(), tearDown func()) func(func()) {
+func RunForEach(setUp func(), tearDown func()) func(func()) {
 	return func(testFunc func()) {
 		setUp()
 		testFunc()
