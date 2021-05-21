@@ -26,7 +26,7 @@ func Exists(path string) bool {
 
 // ErrExit prints an error message to stderr and exits with an erroneous return code
 func ErrExit(m string) {
-	println(m)
+	fmt.Println(m)
 	os.Exit(1)
 }
 

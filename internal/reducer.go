@@ -62,7 +62,7 @@ func RemoveWarpPoint(c *Command) {
 
 func GotoWarpPoint(c *Command) {
 	p := Portal{
-		Alias: c.Trim(), // TODO check for empty
+		Alias: c.Trim(), // TODO check for empty, regex alphanumeric only
 	}
 
 	// init db conn

@@ -1,21 +1,14 @@
-tp () {
-  local OUT=$(apparate $@)
-  
-  if [[ $? -eq 3 ]];
+apparate () {
+  # in order to get the exit code from the subshell, we must declare the local var first
+  local OUT
+  local SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+  OUT=$("$SCRIPT_DIR/apparate" $@)
+
+  if [[ $? -eq 3 ]]; then
+  echo "$OUT"
     cd "$OUT"
-  else 
+  else
     echo -e "$OUT"
   fi
 }
-
-tp_dev () {
-  local OUT=$(go run main.go $@)
-  
-  if [[ $? -eq 3 ]];
-    cd "$OUT"
-  else 
-    echo -e "$OUT"
-  fi
-}
-
-tp_dev "$@"

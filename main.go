@@ -34,10 +34,8 @@ func main() {
 	switch cmd.Directive {
 	case ADD:
 		internal.AddWarpPoint(&cmd)
-	// name
 	case REMOVE:
 		internal.RemoveWarpPoint(&cmd)
-	// name
 	case GOTO:
 		internal.GotoWarpPoint(&cmd)
 	case HELP:
