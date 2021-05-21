@@ -70,6 +70,7 @@ func TestMain(t *testing.T) {
 			t.Fatal(err)
 		}
 
+		/* DELETE NOT EXTANT */
 		if err := db.Delete(&p); err != internal.ErrNotFound {
 			t.Fatalf("delete returned %v, expected %s", err, internal.ErrNotFound.Error())
 		}

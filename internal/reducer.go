@@ -5,6 +5,7 @@ import (
 	"os"
 )
 
+// AddWarpPoint adds a warp point to the current path
 func AddWarpPoint(c *Command) {
 	// get current Path
 	loc, err := os.Getwd()
@@ -34,6 +35,7 @@ func AddWarpPoint(c *Command) {
 	OkExit(fmt.Sprintf("Added new warp-point %s for %s", p.Alias, p.Path))
 }
 
+// RemoveWarpPoint removes the warp point for the given alias, if extant
 func RemoveWarpPoint(c *Command) {
 
 	p := Portal{
@@ -60,6 +62,7 @@ func RemoveWarpPoint(c *Command) {
 	OkExit(fmt.Sprintf("Warp-point %s has been removed", p.Alias))
 }
 
+// GotoWarpPoint emits the path for a given warp point, if extant
 func GotoWarpPoint(c *Command) {
 	p := Portal{
 		Alias: c.Trim(), // TODO check for empty, regex alphanumeric only

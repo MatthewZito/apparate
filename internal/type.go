@@ -24,6 +24,7 @@ func (c *Command) Trim() string {
 	return strings.TrimSpace(c.Alias)
 }
 
+// Conn resolves the user config file and initializes the database thereat
 func Conn() (*Database, error) {
 	// f := os.Getenv("APPARATE_CONF")
 

@@ -14,6 +14,7 @@ build: shell
 	$(GOBUILD) -o $(BIN_NAME) -v
 
 .PHONY: test
+
 test: 
 	$(GOTEST) -v ./...
 

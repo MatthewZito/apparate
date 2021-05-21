@@ -15,20 +15,22 @@ type Database struct {
 }
 
 var (
-	// ENotFound indicates the key provided for Get, Delete ops
+	// ErrNotFound indicates the key provided for Get, Delete ops
 	// is not extant in the db
 	ErrNotFound = errors.New("warp-point does not exist") // TODO add alias
 
-	// ENoConfigVar indicates the environment variable for the apparate config file was not found
+	// ErrNoConfigVar indicates the environment variable for the apparate config file was not found
 	ErrNoConfigVar = errors.New("configuration file not found; did you set APPARATE_CONF to the desired Path?")
 
 	bucketName = []byte("apparate")
 )
 
+// ErrFileNotFound pattern-matches against os.Stat file-not-found errors
 func ErrFileNotFound(name string) error {
 	return fmt.Errorf("could not resolve Path for configuration file %s", name)
 }
 
+// Open initializes and returns a pointer to a new database connection
 func Open(Path string) (*Database, error) {
 	opts := &bolt.Options{
 		Timeout: 50 * time.Millisecond,
@@ -49,6 +51,7 @@ func Open(Path string) (*Database, error) {
 	}
 }
 
+// Get retrieves a database record, if extant
 func (conn *Database) Get(p *Portal) error {
 	return conn.db.View(func(tx *bolt.Tx) error {
 		c := tx.Bucket(bucketName).Cursor()
@@ -62,6 +65,7 @@ func (conn *Database) Get(p *Portal) error {
 	})
 }
 
+// Put updates a database record if extant, else creates it
 func (conn *Database) Put(p *Portal) error {
 	var buf bytes.Buffer
 
@@ -74,6 +78,7 @@ func (conn *Database) Put(p *Portal) error {
 	})
 }
 
+// Delete updates a database record by removing it, if extant
 func (conn *Database) Delete(p *Portal) error {
 	return conn.db.Update(func(tx *bolt.Tx) error {
 		c := tx.Bucket(bucketName).Cursor()
@@ -86,6 +91,7 @@ func (conn *Database) Delete(p *Portal) error {
 	})
 }
 
+// Close closes the database connection
 func (conn *Database) Close() error {
 	return conn.db.Close()
 }
